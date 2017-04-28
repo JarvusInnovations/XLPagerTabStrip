@@ -106,11 +106,13 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         containerView.isPagingEnabled = true
         reloadViewControllers()
         
-        let childController = viewControllers[currentIndex]
-        addChildViewController(childController)
-        childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        containerView.addSubview(childController.view)
-        childController.didMove(toParentViewController: self)
+        if(viewControllers.count > currentIndex && currentIndex >= 0) {
+            let childController = viewControllers[currentIndex]
+            addChildViewController(childController)
+            childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            containerView.addSubview(childController.view)
+            childController.didMove(toParentViewController: self)
+        }
     }
     
     open override func viewWillAppear(_ animated: Bool) {
